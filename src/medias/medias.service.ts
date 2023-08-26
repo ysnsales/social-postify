@@ -4,13 +4,11 @@ import { CreateMediaDto } from './dto/create-media.dto';
 
 @Injectable()
 export class MediasService {
-    constructor (
-        private readonly mediasRepository: MediasRepository
-      ) {}
+    constructor (private readonly mediasRepository: MediasRepository) {}
 
-      async createMedia(createMediaDto: CreateMediaDto){
-        await this.checkMedia(createMediaDto);
-        return await this.mediasRepository.createMedia(createMediaDto);
+      async createMedia(data: CreateMediaDto){
+        await this.checkMedia(data);
+        return await this.mediasRepository.createMedia(data);
       };
 
       async checkMedia(data: CreateMediaDto){

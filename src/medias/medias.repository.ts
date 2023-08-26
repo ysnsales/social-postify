@@ -57,4 +57,15 @@ export class MediasRepository {
         })
     }
 
+    async deleteMedia(id: number){
+        return this.prisma.media.delete({
+            where: { id },
+            select: {
+                id: true,
+                title: true,
+                username: true
+            }
+        })
+    }
+
 }

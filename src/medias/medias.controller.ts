@@ -7,8 +7,8 @@ export class MediasController {
     constructor(private readonly mediasService: MediasService) {}
 
     @Post()
-    create(@Body() createMediaDto: CreateMediaDto){
-        return this.mediasService.createMedia(createMediaDto);
+    createMedia(@Body() data: CreateMediaDto){
+        return this.mediasService.createMedia(data);
     }
 
     @Get()
@@ -22,7 +22,7 @@ export class MediasController {
     }
 
     @Put(':id')
-    updateMedia(@Param('id', ParseIntPipe) id: string, @Body() createMediaDto: CreateMediaDto) {
-        return this.mediasService.updateMedia(+id, createMediaDto);
+    updateMedia(@Param('id', ParseIntPipe) id: string, @Body() data: CreateMediaDto) {
+        return this.mediasService.updateMedia(+id, data);
     }
 }
