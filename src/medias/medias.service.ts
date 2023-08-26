@@ -10,9 +10,13 @@ export class MediasService {
 
       async createMedia(createMediaDto: CreateMediaDto){
         return await this.mediasRepository.createMedia(createMediaDto);
-      }
+      };
 
       async getMedias() {
         return await this.mediasRepository.getMedias();
-      }
+      };
+
+      async getMediaById(id: number){
+        return await this.mediasRepository.getMediaById(id);
+      };
 }

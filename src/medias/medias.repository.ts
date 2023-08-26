@@ -27,4 +27,16 @@ export class MediasRepository {
         })
     }
 
+    async getMediaById(id: number){
+        return this.prisma.media.findFirst({
+            where: { id },
+            select: {
+                id: true,
+                title: true,
+                username: true
+            }
+        })
+
+    }
+
 }
