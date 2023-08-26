@@ -41,4 +41,17 @@ export class PostsRepository {
             }
         })
     }
+
+    async updatePost(id: number, data: CreatePostDto){
+        return this.prisma.post.update({
+            where: { id },
+            data,
+            select: {
+                id: true,
+                title: true,
+                text: true,
+                image: true
+            }
+        })
+    }
 }

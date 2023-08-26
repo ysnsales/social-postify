@@ -19,4 +19,9 @@ export class PostsService {
         if(!post) throw new NotFoundException();
         return post;
     }
+
+    async updatePost(id: number, data: CreatePostDto){
+        await this.getPostById(id);
+        return await this.postRepository.updatePost(id, data);
+      }
 }
