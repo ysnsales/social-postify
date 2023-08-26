@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { MediasRepository } from './medias.repository';
 import { CreateMediaDto } from './dto/create-media.dto';
 
@@ -9,14 +9,22 @@ export class MediasService {
       ) {}
 
       async createMedia(createMediaDto: CreateMediaDto){
+        await this.checkMedia(createMediaDto);
         return await this.mediasRepository.createMedia(createMediaDto);
       };
+
+      async checkMedia(data: CreateMediaDto){
+        const media = await this.mediasRepository.checkMedia(data);
+        if (media) throw new ConflictException();
+      }
 
       async getMedias() {
         return await this.mediasRepository.getMedias();
       };
 
       async getMediaById(id: number){
-        return await this.mediasRepository.getMediaById(id);
+        const media = await this.mediasRepository.getMediaById(id);
+        if(!media) throw new NotFoundException();
+        return media;
       };
 }
