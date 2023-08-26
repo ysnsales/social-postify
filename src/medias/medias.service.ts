@@ -27,4 +27,10 @@ export class MediasService {
         if(!media) throw new NotFoundException();
         return media;
       };
+
+      async updateMedia(id: number, data: CreateMediaDto){
+        await this.getMediaById(id);
+        await this.checkMedia(data);
+        return await this.mediasRepository.updateMedia(id, data);
+      }
 }

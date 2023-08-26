@@ -45,4 +45,16 @@ export class MediasRepository {
 
     }
 
+    async updateMedia(id: number, data: CreateMediaDto){
+        return this.prisma.media.update({
+            where: { id },
+            data,
+            select: {
+                id: true,
+                title: true,
+                username: true
+            }
+        })
+    }
+
 }
