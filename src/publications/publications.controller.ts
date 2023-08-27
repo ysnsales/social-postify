@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { PublicationsService } from './publications.service';
 import { CreatePublicationDto } from './dtos/create-publication.dto';
 
@@ -24,5 +24,10 @@ export class PublicationsController {
     @Put(':id')
     updatePublication(@Param('id', ParseIntPipe) id: string, @Body() data: CreatePublicationDto){
         return this.publicationsService.updatePublication(+id, data);
+    }
+
+    @Delete(':id')
+    deletePublication(@Param('id', ParseIntPipe) id: string){
+        return this.publicationsService.deletePublication(+id)
     }
 }

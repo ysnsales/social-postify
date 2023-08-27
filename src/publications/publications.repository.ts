@@ -65,4 +65,8 @@ export class PublicationRepository{
         })
     }
 
+    async deletePublication(id: number){
+        return this.prisma.publication.delete({where: { id }});
+    }
+
 }

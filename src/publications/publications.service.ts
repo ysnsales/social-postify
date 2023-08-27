@@ -36,4 +36,9 @@ export class PublicationsService {
         return await this.publicationRepository.updatePublication(id, data);
     }
 
+    async deletePublication(id: number){
+        await this.getPublicationById(id);
+        return await this.publicationRepository.deletePublication(id);
+    }
+
 }
