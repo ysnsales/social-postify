@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { PublicationRepository } from './publications.repository';
 import { CreatePublicationDto } from './dtos/create-publication.dto';
 import { MediasService } from '../medias/medias.service';
@@ -25,6 +25,15 @@ export class PublicationsService {
         const publication = await this.publicationRepository.getPublicationsById(id);
         if (!publication) throw new NotFoundException();
         return publication;
+    }
+
+    async updatePublication(id: number, data: CreatePublicationDto){
+        await this.getPublicationById(id);
+        await this.mediasService.getMediaById(data.mediaId);
+        await this.postsService.getPostById(data.postId);
+        if (new Date(data.date) < new Date()) throw new ForbiddenException; //veriicar se ja foi publicado
+
+        return await this.publicationRepository.updatePublication(id, data);
     }
 
 }

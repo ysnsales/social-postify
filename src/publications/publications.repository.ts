@@ -52,4 +52,17 @@ export class PublicationRepository{
         })
     }
 
+    async updatePublication(id: number, data: CreatePublicationDto){
+        return this.prisma.publication.update({
+            where: { id },
+            data,
+            select: {
+                id: true,
+                mediaId: true,
+                postId: true,
+                date: true
+            }
+        })
+    }
+
 }

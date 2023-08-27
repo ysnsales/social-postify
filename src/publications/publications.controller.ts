@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { PublicationsService } from './publications.service';
 import { CreatePublicationDto } from './dtos/create-publication.dto';
 
@@ -19,5 +19,10 @@ export class PublicationsController {
     @Get(':id')
     getPublicationById(@Param('id', ParseIntPipe) id: string){
         return this.publicationsService.getPublicationById(+id);
+    }
+
+    @Put(':id')
+    updatePublication(@Param('id', ParseIntPipe) id: string, @Body() data: CreatePublicationDto){
+        return this.publicationsService.updatePublication(+id, data);
     }
 }
