@@ -18,4 +18,38 @@ export class PublicationRepository{
         })
     }
 
+    async getPublications(published?: string, after?: Date) {
+        return this.prisma.publication.findMany({
+            where: {
+                date: {
+                    lt: published === 'true' ? new Date() : undefined,
+                    gt: published === 'false' ? new Date() : undefined
+                },
+                AND: {
+                    date: {
+                        gt: after ? new Date(after) : undefined,
+                    }
+                }
+            },
+            select: {
+                id: true,
+                mediaId: true,
+                postId: true,
+                date: true
+            }
+        })
+    }
+
+    async getPublicationsById(id: number){
+        return this.prisma.publication.findFirst({
+            where: { id },
+            select: {
+                id: true,
+                mediaId: true,
+                postId: true,
+                date: true
+            }
+        })
+    }
+
 }
