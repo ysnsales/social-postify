@@ -10,4 +10,4 @@ import { MediasRepository } from './medias.repository';
   controllers: [MediasController],
   exports: [MediasService]
 })
-export class MediaModule {}
+export class MediasModule {}
