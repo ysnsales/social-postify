@@ -69,4 +69,28 @@ export class PublicationRepository{
         return this.prisma.publication.delete({where: { id }});
     }
 
+    async getPublicationsByMediaId(mediaId: number){
+        return this.prisma.publication.findFirst({
+            where: { mediaId },
+            select: {
+                id: true,
+                mediaId: true,
+                postId: true,
+                date: true
+            }
+        })
+    }
+
+    async getPublicationsByPostId(postId: number){
+        return this.prisma.publication.findFirst({
+            where: { postId },
+            select: {
+                id: true,
+                mediaId: true,
+                postId: true,
+                date: true
+            }
+        })
+    }
+
 }
